@@ -1,0 +1,9 @@
+% layout 'blog_layout';
+
+<h2>Blog index</h2>
+
+<ul>
+<% foreach (@{$postlist}) { %>
+<li><%= $_->{title} %></li>
+<% } %>
+</ul>

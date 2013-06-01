@@ -1,0 +1,53 @@
+#!/usr/bin/env perl
+use Mojolicious::Lite;
+
+# conditions
+my $conditions = {
+    authenticated => sub {
+        my $self = shift;
+        unless ($self->session('authenticated')) {
+            $self->flash(
+                class   => 'alert alert-info',
+                message => 'Please log in first!'
+            );
+            $self->redirect_to('/login');
+            return;
+        }
+        return 1;
+    },
+};
+
+plugin 'Blog' => {
+    authCondition => $conditions,
+    dsn           => "dbi:Pg:dbname=myblog",
+    dbuser        => 'zef',
+    dbpass        => $ENV{DBPASS},
+};
+
+# Documentation browser under "/perldoc"
+plugin 'PODRenderer';
+
+get '/' => sub {
+    my $self = shift;
+    $self->render('index');
+};
+
+get '/login' => sub {
+    my $self = shift;
+    $self->render(text => 'Setup your login authorization form here');
+};
+
+app->start;
+__DATA__
+
+@@ index.html.ep
+% layout 'default';
+% title 'Welcome';
+neat0 blog.
+
+@@ layouts/default.html.ep
+<!DOCTYPE html>
+<html>
+  <head><title><%= title %></title></head>
+  <body><%= content %></body>
+</html>

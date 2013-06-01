@@ -1,0 +1,150 @@
+NAME
+    Mojolicious::Plugin::Blog - Mojolicious Plugin
+
+SYNOPSIS
+      # Mojolicious
+
+      # Set authentication condition
+      my $conditions = {
+        authenticated => sub {
+            my $self = shift;
+            unless ($self->session('authenticated')) {
+                $self->flash(
+                    class   => 'alert alert-info',
+                    message => 'Please log in first!'
+                );
+                $self->redirect_to('/login');
+                return;
+            }
+            return 1;
+        },
+      };
+
+      $self->plugin('Blog' => {
+          authCondition => $conditions
+          dsn => "dbi:Pg:dbname=myblog",
+          dbuser => 'zef',
+          dbpass => 'letmein',
+        }
+      );
+
+      # Mojolicious::Lite
+      plugin 'Blog' => {
+        authCondition => $conditions,
+        dsn => "dbi:Pg:dbname=myblog",
+        dbuser => 'zef',
+        dbpass => 'letmein',
+      };
+
+DESCRIPTION
+    Mojolicious::Plugin::Blog is a Mojolicious plugin. The database layer is
+    using DBIx::ResultSet so support for most databases is available. The
+    examples in this distribution utilize Postgres.
+
+OPTIONS
+    The blog options provide the gateway into defining your routes, database
+    connection, authentication conditions, blog title, slogan, and more.
+
+  "title"
+    Your blog title.
+
+  "slogan"
+    Blog slogan.
+
+  "author"
+    Who are you?
+
+  "contact"
+    Your email
+
+  "tz"
+    What timezone are you? e.g. 'America/New_York' for EST.
+
+  "social"
+    Not implemented yet. However, support for integrating github, coderwall,
+    twitter, and others coming soon.
+
+        # Social Integration options
+        social => {
+            github    => 'battlemidget',
+            coderwall => 'battlemidget',
+            twitter   => 'ajscg',
+        },
+
+  "dsn"
+    Database URI
+
+  "dbuser"
+    Database User
+
+  "dbpass"
+    Database password
+
+  "dbconn"
+    Database connection, doesn't need to be manually set.
+
+  "dbrs"
+    Database Resultset, again doesn't need to be set unless you implement
+    your own database layer.
+
+  "indexPath"
+    Blog index route
+
+  "archivePath"
+    Blog archive path
+
+  "postPath"
+    Blog detail post path
+
+  "adminPathPrefix"
+    Blog admin prefix route
+
+  "namespace"
+    Blog controller namespace.
+
+  "authCondition"
+    Router bridge for authencating the blog admin section. See the SYNOPSIS
+    for example.
+
+  "renderType"
+    Not Implemented, however the thought behind this was to allow return
+    JSON in case someone wanted to override existing templates.
+
+METHODS
+    Mojolicious::Plugin::Blog inherits all methods from Mojolicious::Plugin
+    and implements the following new ones.
+
+  register
+      $plugin->register(Mojolicious->new);
+
+    Register plugin in Mojolicious application.
+
+WHAT WORKS
+    Examples are include to show a work copy of the blog plugin for viewing
+    all blog posts and by detail.
+
+TODO
+    Complete Administration section for adding/deleting/updating.
+
+GOALS
+    Hopefully make this as database agnostic as possible and the overall
+    plugin a useful starting point for those wishing to implement a blog in
+    Mojolicious.
+
+PATCHES
+    I love patches and community involvement, so please get involved and
+    submit pull requests and issues at
+
+    <https://github.com/battlemidget/Mojolicious-Plugin-Blog>
+
+SEE ALSO
+    Mojolicious, Mojolicious::Guides, <http://mojolicio.us>.
+
+COPYRIGHT AND LICENSE
+    This plugin is copyright (c) 2013 by Adam Stokes <adamjs@cpan.org>
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
+    Mojolicious is copyright (c) 2013 Sebastian Riedel <sri@cpan.org>
+
