@@ -20,10 +20,13 @@ requires:
   DBIx::ResultSet: 0
   Data::Dump: 0
   File::Basename: 0
+  File::ShareDir: 0
   File::Spec::Functions: 0
   Mojo::Base: 0
+  Path::Tiny: 0
+  perl: v5.16.0
   strictures: 1
 resources:
   homepage: https://github.com/battlemidget/Mojolicious-Plugin-Blog
   repository: https://github.com/battlemidget/Mojolicious-Plugin-Blog.git
-version: 0.002
+version: 0.003

@@ -4,6 +4,6 @@
 
 <ul>
 <% foreach (@{$postlist}) { %>
-<li><%= $_->{title} %></li>
+<li><a href="<%= url_for('blogid', {id => $_->{id}}) %>"><%= $_->{title} %></a></li>
 <% } %>
 </ul>

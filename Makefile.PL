@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-
+use 5.016000;
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -19,15 +19,19 @@ my %WriteMakefileArgs = (
     "File::ShareDir::Install" => "0.03"
   },
   "DISTNAME" => "Mojolicious-Plugin-Blog",
-  "EXE_FILES" => [],
+  "EXE_FILES" => [
+    "bin/mojo-blog-db"
+  ],
   "LICENSE" => "perl",
   "NAME" => "Mojolicious::Plugin::Blog",
   "PREREQ_PM" => {
     "DBIx::ResultSet" => 0,
     "Data::Dump" => 0,
     "File::Basename" => 0,
+    "File::ShareDir" => 0,
     "File::Spec::Functions" => 0,
     "Mojo::Base" => 0,
+    "Path::Tiny" => 0,
     "strictures" => 1
   },
   "TEST_REQUIRES" => {
@@ -35,7 +39,7 @@ my %WriteMakefileArgs = (
     "Test::Mojo" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }

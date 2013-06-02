@@ -1,8 +1,11 @@
 requires "DBIx::ResultSet" => "0";
 requires "Data::Dump" => "0";
 requires "File::Basename" => "0";
+requires "File::ShareDir" => "0";
 requires "File::Spec::Functions" => "0";
 requires "Mojo::Base" => "0";
+requires "Path::Tiny" => "0";
+requires "perl" => "v5.16.0";
 requires "strictures" => "1";
 
 on 'test' => sub {

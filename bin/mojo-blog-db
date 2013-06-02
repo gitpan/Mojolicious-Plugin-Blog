@@ -1,0 +1,33 @@
+#!/usr/bin/env perl
+
+use strictures 1;
+use v5.16;
+use Data::Dump qw[pp];
+use File::ShareDir ':ALL';
+use Path::Tiny;
+
+our $VERSION = '0.003'; # VERSION
+
+sub do_sqlite {
+  say "Writing db";
+  my $sqlite_db = path(dist_dir('Mojolicious-Plugin-Blog'), 'sqlite_create_table.sql');
+  my $cmd = join(" ", "sqlite3", $ARGV[1], "<", $sqlite_db->canonpath);
+  `$cmd`;
+}
+
+sub pg {
+
+    # Assumes ENV['USER'] is granted permission to postgresql.
+    `createdb $ARGV[2]`;
+    `psql $ARGV[2] < $ARGV[3]`;
+}
+
+if (scalar @ARGV < 2) {
+    say "Sorry need [sqlite|pg] [database]";
+    exit;
+}
+
+if ($ARGV[0] eq "sqlite") {
+    say "Initializing sqlite3 database and table";
+    do_sqlite;
+}

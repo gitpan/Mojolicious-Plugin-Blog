@@ -19,9 +19,7 @@ my $conditions = {
 
 plugin 'Blog' => {
     authCondition => $conditions,
-    dsn           => "dbi:Pg:dbname=myblog",
-    dbuser        => 'zef',
-    dbpass        => $ENV{DBPASS},
+    dsn           => "dbi:SQLite:dbname=db/myblog.db",
 };
 
 # Documentation browser under "/perldoc"
@@ -34,7 +32,19 @@ get '/' => sub {
 
 get '/login' => sub {
     my $self = shift;
-    $self->render(text => 'Setup your login authorization form here');
+    $self->render('login');
+};
+
+get '/logout' => sub {
+  my $self = shift;
+  $self->session->{authenticated} = undef;
+  $self->redirect_to('/login');
+};
+
+post '/login' => sub {
+  my $self= shift;
+  $self->session->{authenticated} = 1;
+  $self->redirect_to('/admin/blog/');
 };
 
 app->start;
@@ -44,6 +54,22 @@ __DATA__
 % layout 'default';
 % title 'Welcome';
 neat0 blog.
+
+@@ login.html.ep
+% layout 'default';
+% title 'Login';
+
+<h2>Auth</h2>
+
+%= form_for '/login' => ( method => 'POST' ) => begin
+    <label>Login</label>
+    %= text_field 'login', class => 'span3', type => 'text'
+    <br />
+    <label>Password</label>
+    %= password_field 'password', class => 'span3'
+    <br />
+    %= submit_button 'Login'
+% end
 
 @@ layouts/default.html.ep
 <!DOCTYPE html>
