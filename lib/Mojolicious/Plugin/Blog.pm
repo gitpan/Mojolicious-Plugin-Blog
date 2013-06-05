@@ -8,7 +8,7 @@ use DBIx::ResultSet;
 
 use Mojolicious::Plugin::Blog::Controller;
 
-our $VERSION = '0.003'; # VERSION
+our $VERSION = '0.005'; # VERSION
 
 my %defaults = (
 

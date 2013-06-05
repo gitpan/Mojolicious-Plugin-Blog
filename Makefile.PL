@@ -30,7 +30,9 @@ my %WriteMakefileArgs = (
     "File::Basename" => 0,
     "File::ShareDir" => 0,
     "File::Spec::Functions" => 0,
+    "IO::Prompt" => 0,
     "Mojo::Base" => 0,
+    "Mojo::Util" => 0,
     "Path::Tiny" => 0,
     "strictures" => 1
   },
@@ -39,7 +41,7 @@ my %WriteMakefileArgs = (
     "Test::Mojo" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.003",
+  "VERSION" => "0.005",
   "test" => {
     "TESTS" => "t/*.t"
   }

@@ -7,6 +7,7 @@ bin/mojo-blog-db
 cpanfile
 dist.ini
 eg/tiniblog
+lib/Mojolicious/Command/generate/blog.pm
 lib/Mojolicious/Plugin/Blog.pm
 lib/Mojolicious/Plugin/Blog/Controller.pm
 lib/Mojolicious/Plugin/BlogAssets/templates/admin_blog_edit.html.ep
